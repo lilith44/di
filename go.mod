@@ -1,4 +1,4 @@
-module github.com/di
+module github.com/lilith44/di
 
 go 1.18
 
