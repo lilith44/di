@@ -15,10 +15,6 @@ type c struct {
 	b *b
 }
 
-type d struct {
-	b *b
-}
-
 func newA() *a {
 	return new(a)
 }
@@ -31,24 +27,13 @@ func newC(b *b) *c {
 	return &c{b: b}
 }
 
-func newD(b *b) *d {
-	return &d{b: b}
-}
-
 func TestNew(t *testing.T) {
 	di := New()
 
 	di.Provide(
 		NewConstructor(newA),
 		NewConstructor(newB),
-		NewConstructor(newC),
-		NewConstructor(newD),
 	)
 
-	di.Prepare(
-		NewInvokeFunction(newC),
-		NewInvokeFunction(newD),
-	)
-
-	di.Invoke()
+	di.Invoke(NewInvokeFunction(newC))
 }
